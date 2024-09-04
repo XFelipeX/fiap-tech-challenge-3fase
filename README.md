@@ -28,7 +28,11 @@ docentes e alunos(as) interagir com os diversos endpoints REST já
 implementados no back-end.
 Requisitos funcionais
 
+---
+
 ### A interface gráfica deve incluir as seguintes páginas e funcionalidades
+
+#### Requisitos funcionais
 
 1. Página principal (Lista de posts)
    o Exibir uma lista de todos os posts disponíveis.
@@ -56,19 +60,22 @@ Requisitos funcionais
    o Garantir que apenas usuários autenticados possam acessar as
    páginas de criação, edição e administração de postagens.
    Requisitos técnicos
-7. Desenvolvimento em React
+
+#### Requisitos técnicos
+
+1. Desenvolvimento em React
    o Utilizar React para desenvolver a interface gráfica.
    o Utilização de hooks e componentes funcionais.
-8. Estilização e responsividade
+2. Estilização e responsividade
    o Utilizar Styled Components ou outro método de estilização.
    o Garantir que a aplicação seja responsiva, funcionando bem em
    dispositivos móveis e desktops.
-9. Integração com Back-End
+3. Integração com Back-End
    o Realizar chamadas aos endpoints REST para obter, criar, editar e
    excluir posts.
    o Gerenciar o estado da aplicação com ferramentas como Context
    API ou Redux (opcional).
-10. Documentação
-    o Documentação técnica detalhada do front-end no README do
-    repositório, incluindo setup inicial, arquitetura da aplicação e guia
-    de uso.
+4. Documentação
+   o Documentação técnica detalhada do front-end no README do
+   repositório, incluindo setup inicial, arquitetura da aplicação e guia
+   de uso.

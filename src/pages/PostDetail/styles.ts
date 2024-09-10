@@ -32,20 +32,11 @@ export const CardTitle = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 10px;
   margin: 0px;
-  cursor: pointer;
 `;
 
 export const CardContent = styled.p`
   font-size: 1rem;
-  margin: 10px 0px 0px 0px;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-
-  @media (max-width: 600px) {
-    -webkit-line-clamp: 6;
-  }
+  margin: 50px 0px 20px 0px;
 `;
 
 export const CardPostInfo = styled.div`

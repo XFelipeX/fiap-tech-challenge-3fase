@@ -1,37 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 import {
   HeaderContainer,
   HeaderTitle,
   HeaderButton,
   HeaderSidebar,
-  HeaderSidebarLink,
-  HeaderOverlay,
+  HeaderSidebarLink
 } from './styles'
 
 const Header: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen)
   };
 
   return (
     <>
       <HeaderContainer>
-        <HeaderTitle>Blog Tech Challenge - Grupo 37</HeaderTitle>
         <HeaderButton onClick={toggleMenu}>☰</HeaderButton>
+        <HeaderTitle>Blog Tech Challenge - Grupo 37</HeaderTitle>
       </HeaderContainer>
 
-      <HeaderOverlay isOpen={isOpen} onClick={toggleMenu} />
-
       <HeaderSidebar isOpen={isOpen}>
+        <HeaderSidebarLink  onClick={toggleMenu}>X</HeaderSidebarLink>
         <HeaderSidebarLink href="/">Posts</HeaderSidebarLink>
-        <HeaderSidebarLink href="/">Criar Posts</HeaderSidebarLink>
+        <HeaderSidebarLink href="/postsForm">Criar Posts</HeaderSidebarLink>
         <HeaderSidebarLink href="/">Professores</HeaderSidebarLink>
       </HeaderSidebar>
     </>
   );
 };
 
-export default Header;
+export default Header

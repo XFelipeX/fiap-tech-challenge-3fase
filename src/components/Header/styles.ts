@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 const colorType = {
   headerBackground: theme.colors.headerBackground,
-  headerFontColor: theme.colors.headerFontColor
+  headerFontColor: theme.colors.headerFontColor,
 }
 
 export const HeaderContainer = styled.header`
@@ -11,13 +11,13 @@ export const HeaderContainer = styled.header`
   padding: 15px;
   color: ${colorType.headerFontColor};
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: relative;
 `;
 
 export const HeaderTitle = styled.h1`
   font-size: 1.5rem;
+  margin-left: 15px;
 `;
 
 export const HeaderButton = styled.button`
@@ -51,10 +51,7 @@ export const HeaderSidebarLink = styled.a`
   text-decoration: none;
   margin-bottom: 20px;
   font-size: 1.2rem;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  cursor: pointer;
 `;
 
 export const HeaderOverlay = styled.div<{ isOpen: boolean }>`
@@ -64,6 +61,5 @@ export const HeaderOverlay = styled.div<{ isOpen: boolean }>`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;

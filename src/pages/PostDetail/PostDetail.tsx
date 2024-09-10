@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import {
   PostsContainer,
@@ -12,11 +12,11 @@ import {
 } from './styles'
 
 interface Post {
-  id: number
-  authorName: string
-  title: string
-  content: string
-  createdDate: string
+	id: number
+	authorName: string
+	title: string
+	content: string
+	createdDate: string
 }
 
 const mockPosts: Post[] = [
@@ -25,29 +25,25 @@ const mockPosts: Post[] = [
   { id: 3, authorName: 'Thiago Fialho', createdDate: '06/09/2024', title: 'Título Post', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tincidunt leo id ultrices efficitur. Curabitur dapibus aliquet imperdiet. Donec pellentesque hendrerit ornare. Suspendisse a velit sed arcu ullamcorper lacinia. Curabitur pharetra magna id magna vehicula, non tempus purus porta. Integer quis tortor dignissim, interdum leo commodo, aliquet nunc. Ut sit amet sem blandit, faucibus orci vel, feugiat tellus. Aliquam velit velit, rhoncus id erat ullamcorper, ullamcorper rhoncus augue. Pellentesque at risus eget arcu auctor vehicula. Integer et elementum sem. Nullam aliquet pellentesque nisi, non bibendum nulla placerat ac. Duis a risus tincidunt, viverra elit ut, aliquet massa. Maecenas eget laoreet erat, non aliquet mi. Aenean gravida turpis tellus, vel dignissim magna ullamcorper et. Donec at massa quis odio accumsan volutpat.' },
 ]
 
-const PostsList: React.FC = () => {
-  const navigate = useNavigate()
-  const [posts, setPosts] = useState<Post[]>(mockPosts)
-
-	const handleSelectPost = (postId: number) => {
-    console.log('Aqui redireciona para: ' + postId)
-    navigate(`/posts/${postId}`)
-  }
+const PostDetail: React.FC = () => {
+	const { id } = useParams<{ id: string }>()
+	const [post, setPost] = useState<Post>()
+	useEffect(() => {
+		setPost(mockPosts.find(p => p.id === Number(id)))
+	}, [id])
 
   return (
     <PostsContainer>
-      {posts.map((post) => (
-        <Card key={post.id}>
-          <CardTitle onClick={() => handleSelectPost(post.id)}>{post.title}</CardTitle>
-          <CardContent>{post.content}</CardContent>
-          <CardPostInfo>
-            <CardAuthor>Por {post.authorName}</CardAuthor>
-            <CardDate>{post.createdDate}</CardDate>
-          </CardPostInfo>
-        </Card>
-      ))}
+			<Card key={post?.id}>
+				<CardTitle>{post?.title}</CardTitle>
+				<CardContent>{post?.content}</CardContent>
+				<CardPostInfo>
+					<CardAuthor>Por {post?.authorName}</CardAuthor>
+					<CardDate>{post?.createdDate}</CardDate>
+				</CardPostInfo>
+			</Card>
     </PostsContainer>
   );
 };
 
-export default PostsList
+export default PostDetail

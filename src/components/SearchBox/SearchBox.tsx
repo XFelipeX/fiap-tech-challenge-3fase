@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   SearchContainer,
   SearchInput,
@@ -19,4 +19,4 @@ const SearchBox: React.FC = () => {
   );
 };
 
-export default SearchBox;
+export default SearchBox

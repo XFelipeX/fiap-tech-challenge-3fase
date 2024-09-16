@@ -81,3 +81,10 @@ export const CardDate = styled.p`
     text-align: center;
   }
 `;
+
+export const FeedBackMessage = styled.p`
+  margin-top: 10%;
+  color: ${colorType.standardFont};
+  font-weight: bold;
+  text-align: center;
+`;

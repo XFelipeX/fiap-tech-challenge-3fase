@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
+import SearchBox from '../../components/SearchBox/SearchBox'
 
 import {
   PostsContainer,
@@ -10,6 +11,7 @@ import {
   CardPostInfo,
   CardAuthor,
   CardDate,
+  FeedBackMessage
 } from './styles'
 
 interface Post {
@@ -31,6 +33,7 @@ const PostsList: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>(mockPosts)
   const [error,setError] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
+  const [search, setSearch] = useState<string>('')
 
 	const handleSelectPost = (postId: number) => {
     console.log('Aqui redireciona para: ' + postId)
@@ -52,26 +55,47 @@ const PostsList: React.FC = () => {
     fectchPosts();
   },[])
 
+  const handleSearch = (term: string) => {
+    setSearch(term);
+  }
+  
+  const filteredPosts = posts.filter((post) => 
+    post.title.toLowerCase().includes(search.toLowerCase()) ||
+    post.content.toLowerCase().includes(search.toLowerCase())
+  )
+
+
+  if (filteredPosts.length == 0) {
+    return (
+      <>
+        <SearchBox onSearch={handleSearch}/>
+        <FeedBackMessage>Nenhum resultado encontrado</FeedBackMessage>
+      </>
+    )
+  }
   if (loading) {
-    return <p>Carregando...</p>
+    return <FeedBackMessage>Carregando...</FeedBackMessage>
   }
   if(error) {
-    return <p>Error: {error}</p>
+    return <FeedBackMessage>Error: {error}</FeedBackMessage>
   }
 
   return (
-    <PostsContainer>
-      {posts.map((post) => (
-        <Card key={post.id}>
-          <CardTitle onClick={() => handleSelectPost(post.id)}>{post.title}</CardTitle>
-          <CardContent>{post.content}</CardContent>
-          <CardPostInfo>
-            <CardAuthor>Por {post.teachername}</CardAuthor>
-            <CardDate>{post.createddate}</CardDate>
-          </CardPostInfo>
-        </Card>
-      ))}
-    </PostsContainer>
+    <>
+      <SearchBox onSearch={handleSearch}/>
+      <PostsContainer>
+        {filteredPosts.map((post) => (
+          <Card key={post.id}>
+            <CardTitle onClick={() => handleSelectPost(post.id)}>{post.title}</CardTitle>
+            <CardContent>{post.content}</CardContent>
+            <CardPostInfo>
+              <CardAuthor>Por {post.teachername}</CardAuthor>
+              <CardDate>{post.createddate}</CardDate>
+            </CardPostInfo>
+          </Card>
+        ))}
+      </PostsContainer>
+    </>
   );
 };
 

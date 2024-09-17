@@ -66,7 +66,7 @@ const PostsForm: React.FC = () => {
 					const currentPost = response.data.currentPost
 					setFormData({
 						title: currentPost?.title ?? '',
-						author: currentPost?.teacherId ?? '',
+						author: currentPost?.teacherid ?? '',
 						content: currentPost?.content ?? ''
 					})
 

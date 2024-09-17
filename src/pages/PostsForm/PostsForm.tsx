@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup';
 import { api } from '../../services/api'
@@ -16,6 +16,14 @@ interface OptionsData {
   label: string
 }
 
+interface Post {
+	id: number
+	teachername: string
+	title: string
+	content: string
+	createddate: string
+}
+
 const validations = Yup.object({
   title: Yup.string()
     .required('O título é obrigatório'),
@@ -25,16 +33,11 @@ const validations = Yup.object({
     .required('O conteúdo é obrigatório'),
 })
 
-// const mockAuthors: OptionsData[] = [
-// 	{label: 'Felipe Dias', value: '1'},
-// 	{label: 'Sérgio Neto', value: '2'},
-// 	{label: 'Thiago Fialho', value: '3'},
-// ];
-
 const PostsForm: React.FC = () => {
 	const navigate = useNavigate()
-
+	const { id } = useParams<{ id: string }>()
 	const [options, setOptions] = useState<OptionsData[]>([])
+	const [formData, setFormData] = useState({ title: '', author: '', content: '' })
 	const [error, setError] = useState<string | null>(null)
 
 	useEffect(() => {
@@ -55,13 +58,31 @@ const PostsForm: React.FC = () => {
     fetchTeachers();
   }, [])
 
+	useEffect(() => {
+		if (id) {
+			const fetchPost = async () => {
+				try {
+					const response = await api.get(`/posts/${id}`)
+					const currentPost = response.data.currentPost
+					setFormData({
+						title: currentPost?.title ?? '',
+						author: currentPost?.teacherid ?? '',
+						content: currentPost?.content ?? ''
+					})
+
+				} catch (error: any) {
+					setError(error.message)
+				}
+			}
+			fetchPost();
+		}
+	}, [id])
+
 	const createPost = async (values: any) => {
-		const title = values.title
-		const author = values.author
-		const content = values.content
+		const { title, author, content } = values
 		
 		try {
-			const response = await api.post('/posts', {
+			await api.post('/posts', {
 				title: title,
 				teacherId: author,
 				content: content
@@ -73,6 +94,22 @@ const PostsForm: React.FC = () => {
 		}
 	}
 
+	const updatePost = async (values: any) => {
+		const { title, author, content } = values
+		
+		try {
+			await api.put(`/posts/${id}`, {
+				title: title,
+				teacherId: author,
+				content: content
+			});
+
+		} catch (error: any) {
+			setError(error.message)
+		}
+		navigate('/posts')
+	}
+
 	if(error) {
     return <p>Error: {error}</p>
   }
@@ -81,9 +118,10 @@ const PostsForm: React.FC = () => {
 		<PostsContainer>
 			<FormContainer>
 				<Formik
-					initialValues={{ title: '', author: '', content:'' }}
+					initialValues={formData}
+					enableReinitialize={true}
 					validationSchema={validations}
-					onSubmit={createPost}
+					onSubmit={id ? updatePost : createPost}
 				>
 					{({ isSubmitting }) => (
 						<Form>

@@ -54,8 +54,6 @@ const Login: React.FC = () => {
           <SubmitButton type="submit">Entrar</SubmitButton>
         </Form>
       </Formik>
-
-      <BottomText>Não tem cadastro? <Link onClick={() => navigate(`/signUp`)}>Cadastre-se</Link></BottomText>
     </>
   );
 };

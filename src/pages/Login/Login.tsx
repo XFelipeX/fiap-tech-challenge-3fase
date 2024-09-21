@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-
+import { useState } from 'react'
 import {
   Form,
   Label,
@@ -9,43 +9,58 @@ import {
   BottomText,
   Link
 } from "./styles";
+import {api} from '../../services/api'
+import { useAuth } from '../../context/AuthContext'
 
 import { ErrorMessage, Formik } from "formik";
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({ 
-  name: Yup.string()
-    .required('Por favor, informe o nome de usuário!'),
+  email: Yup.string()
+    .required('Por favor, informe o email de usuário!'),
 
   password: Yup.string()
-    .min(8, 'A senha deve possuir pelo menos 8 caracteres!')
+    .min(4, 'A senha deve possuir pelo menos 8 caracteres!')
     .required('Por favor, informe uma senha!'),
 })
 
+interface FormValues {
+  email: string
+  password: string
+}
+
 const Login: React.FC = () => {
   const navigate = useNavigate()
+  const [formData, setFormData] = useState<FormValues>({ email: '', password: '' })
+  const [error, setError] = useState<string | null>(null)
+  const { login} = useAuth();
+  
 
-  const login = (values: unknown) => {
-    console.log('Usuário logado: ', values)
-  }
-
-  const initialValues = {
-    name: '',
-    password: ''
+  function handleLogin(values:FormValues) {
+    api.post('/auth/login', values)
+      .then(response => {
+        login()
+        localStorage.setItem('token', response.data.token)
+        navigate('/posts')
+      })
+      .catch(error => {
+        setError('Usuário e/ou senha inválidos.')
+        console.error('Erro ao logar o usuário: ', error)
+      })
   }
 
   return (
     <>
       <Formik
-        initialValues={initialValues}
-        onSubmit={login}
+        initialValues={formData}
+        onSubmit={handleLogin}
         validationSchema={validationSchema}
       >
         <Form>
 
-          <Label htmlFor="name">Nome de usuário</Label>
-          <Input type="text" name="name" id="name" required />
-          <ErrorMessage name="name" component={ErrorText} />
+          <Label htmlFor="email">Nome de usuário</Label>
+          <Input type="email" name="email" id="email" required />
+          <ErrorMessage name="email" component={ErrorText} />
 
           <Label htmlFor="password">Senha</Label>
           <Input type="password" name="password" id="password" required />
@@ -54,6 +69,7 @@ const Login: React.FC = () => {
           <SubmitButton type="submit">Entrar</SubmitButton>
         </Form>
       </Formik>
+      {error && <ErrorText>{error}</ErrorText>}
     </>
   );
 };

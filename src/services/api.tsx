@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction } from 'react-router-dom';
 
 const baseURL = 'http://localhost:6868';
 
@@ -11,12 +11,12 @@ const api = axios.create({
   },
 });
 
-const setupInterceptors = (navigate) => {
+const setupInterceptors = () => {
   api.interceptors.response.use(
     (response) => response,
     (error) => {
       if (error.response && error.response.status === 401) {
-        navigate('/login');
+        // navigate('/login');
       }
       return Promise.reject(error);
     },
@@ -26,7 +26,7 @@ const setupInterceptors = (navigate) => {
     (config) => {
       const token = localStorage.getItem('token');
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `${token}`;
       }
       return config;
     },

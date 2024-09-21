@@ -4,15 +4,25 @@ import theme from '../../styles/theme'
 const colorType = {
   headerBackground: theme.colors.headerBackground,
   headerFontColor: theme.colors.headerFontColor,
+  headerButtonColor: theme.colors.headerButtonColor,
 }
+
+// export const HeaderContainer = styled.header`
+//   background-color: ${colorType.headerBackground};
+//   padding: 15px;
+//   color: ${colorType.headerFontColor};
+//   display: flex;
+//   align-items: center;
+//   position: relative;
+// `;
 
 export const HeaderContainer = styled.header`
   background-color: ${colorType.headerBackground};
   padding: 15px;
   color: ${colorType.headerFontColor};
-  display: flex;
+  display: grid;
+  grid-template-columns: 100px 1fr 200px;
   align-items: center;
-  position: relative;
 `;
 
 export const HeaderTitle = styled.h1`
@@ -62,4 +72,20 @@ export const HeaderOverlay = styled.div<{ isOpen: boolean }>`
   width: 100vw;
   height: 100vh;
   z-index: 1;
+`;
+
+export const AuthButton = styled.a`
+background-color: ${colorType.headerButtonColor};
+width: 100px;
+height: 30px;
+border: none;
+padding: 5px;
+border-radius: 5px; 
+text-decoration: none;
+display: flex;
+align-items: center;
+justify-content: center;
+color:#fff;
+text-transform: uppercase;
+cursor: pointer;
 `;

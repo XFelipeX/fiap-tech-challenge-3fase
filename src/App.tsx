@@ -1,12 +1,18 @@
 import AppRoutes from './routes/Routes'
 import Header from './components/Header/Header'
+import {setupInterceptors} from './services/api'
+import { AuthProvider } from './context/AuthContext'
+
+setupInterceptors()
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Header />
-      <AppRoutes />
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Header />
+        <AppRoutes />
+      </div>
+    </AuthProvider>
   );
 }
 

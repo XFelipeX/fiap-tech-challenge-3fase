@@ -43,20 +43,20 @@ const PostsListAdmin: React.FC = () => {
     navigate(`/posts/${postId}`)
   }
 
-  useEffect(() => {
-    const fectchPosts = async () => {
-      try {
-        const response = await api.get('/posts');
-        setPosts(response.data.posts);
-      } catch (error: any) {
-        setError(error.message)
-      }finally {
-        setLoading(false)
-      }
-    }
-
+  useEffect(() => { 
     fectchPosts();
   },[])
+
+  const fectchPosts = async () => {
+    try {
+      const response = await api.get('/posts');
+      setPosts(response.data.posts);
+    } catch (error: any) {
+      setError(error.message)
+    }finally {
+      setLoading(false)
+    }
+  }
 
   const handleSearch = (term: string) => {
     setSearch(term);
@@ -67,8 +67,19 @@ const PostsListAdmin: React.FC = () => {
     post.content.toLowerCase().includes(search.toLowerCase())
   )
 
-  const deletePost = () => {
-    throw new Error('Funcionalidade não implementada');
+  const deletePost = async (postId: number) => {
+    const confirmation = confirm('Tem certeza que deseja excluir este post?')
+    
+    if (!confirmation) return
+
+    try {
+      const response = await api.delete(`/posts/${postId}`)
+      fectchPosts()
+      alert('Post excluido com sucesso')
+
+    } catch (error: unknown) {
+      setError(error.message)
+    }
   }
 
 
@@ -92,8 +103,8 @@ const PostsListAdmin: React.FC = () => {
       <SearchBox onSearch={handleSearch}/>
       <PostsContainer>
         {filteredPosts.map((post) => (
-          <CardContainer>
-            <Card key={post.id}>
+          <CardContainer key={post.id}>
+            <Card>
               <CardTitle onClick={() => handleSelectPost(post.id)}>{post.title}</CardTitle>
               <CardContent>{post.content}</CardContent>
               <CardPostInfo>
@@ -103,7 +114,7 @@ const PostsListAdmin: React.FC = () => {
             </Card>
             <PostButtons>
               <ControlButtons variant="edit" onClick={() => navigate(`/postsForm/${post.id}`)}>Editar post</ControlButtons>
-              <ControlButtons variant="delete" onClick={() => deletePost()}>Excluir post</ControlButtons>
+              <ControlButtons variant="delete" onClick={() => deletePost(post.id)}>Excluir post</ControlButtons>
             </PostButtons>
           </CardContainer>
         ))}

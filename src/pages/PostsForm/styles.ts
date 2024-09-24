@@ -42,7 +42,7 @@ export const FormButton = styled.button`
   border: none;
   color: ${colorType.standardFont};
   padding: 0.7rem;
-  margin: 10px 10px;
+  margin: 10px 0;
 
   @media (max-width: 200px) {
     width: 150px;

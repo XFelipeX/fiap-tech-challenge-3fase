@@ -79,3 +79,96 @@ Requisitos funcionais
    o Documentação técnica detalhada do front-end no README do
    repositório, incluindo setup inicial, arquitetura da aplicação e guia
    de uso.
+
+
+## Documentação Técnica do Projeto - FIAP Tech Challenge 3ª Fase
+
+### Introdução
+
+Este documento oferece uma visão detalhada do projeto da 3ª fase do FIAP Tech Challenge. A aplicação foi desenvolvida utilizando React com TypeScript e gerenciada através do Vite como bundler e servidor de desenvolvimento. O projeto é uma interface web para consumir e gerenciar posts, com rotas de autenticação e administração. Aqui, descrevemos como instalar e executar a aplicação, além de dar uma visão geral da arquitetura e stack utilizada.
+
+### Setup Inicial
+
+**Pré-requisitos:**
+
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em seu ambiente:
+
+- Node.js v20+
+- npm v10+
+- Backend implementado na 2ª fase do Tech Challenge, Link para o repositorio: https://github.com/XFelipeX/fiap-tech-challenge-2fase
+
+**Instalação:**
+
+1. Clone o repositório do projeto: 
+```
+git clone https://github.com/XFelipeX/fiap-tech-challenge-3fase.git
+```
+
+3. Navegue até a pasta do projeto: 
+```
+cd fiap-tech-challenge-3fase
+```
+
+4. Instale as dependências do projeto:
+```
+npm install
+```
+
+**Execução:**
+
+Para executar a aplicação em ambiente de desenvolvimento, utilize o seguinte comando:
+```
+npm run dev
+```
+
+Isso iniciará o servidor de desenvolvimento do Vite e a aplicação estará disponível localmente em http://localhost:5173.
+
+Para construir o projeto para produção, execute:
+```
+npm run build
+```
+
+## Arquitetura da Aplicação
+
+A estrutura do projeto segue os princípios do React para a construção de uma SPA (Single Page Application) com suporte ao roteamento via react-router-dom. Abaixo está a descrição das principais partes do projeto:
+
+### Estrutura de Pastas
+
+- **src/**: Contém todo o código fonte da aplicação.
+- **assets/**: Arquivos estáticos (imagens, ícones, etc.).
+- **components/**: Componentes reutilizáveis da interface.
+- **context/**: Gerenciamento de contexto global da aplicação.
+- **pages/**: Páginas principais da aplicação, como:
+  - **Login**: Página de login do usuário.
+  - **PostDetail**: Exibe um post específico para leitura.
+  - **PostsForm**: Formulário para criar ou editar posts.
+  - **PostsList**: Lista todos os posts.
+  - **PostsListAdmin**: Interface de administração para gerenciar posts.
+  - **SignUp**: Página de cadastro de novos usuários.
+- **routes/**: Configura as rotas da aplicação. O arquivo Routes.jsx define os caminhos e seus componentes correspondentes.
+- **services/**: Serviços para chamadas HTTP utilizando Axios.
+- **styles/**: Arquivo de estilo da aplicação que define as cores e fontes globais da aplicação.
+
+## Rotas
+As rotas são definidas no arquivo **Routes.jsx** utilizando o **react-router-dom**:
+
+- **/**: Página principal exibindo a lista de posts.
+- **/posts**: Página com todos os posts.
+- **/posts/:id**: Exibe um post específico para leitura.
+- **/postsAdmin**: Página de administração para gerenciar os posts.
+- **/postsForm**: Formulário de criação e edição de posts.
+- **/login**: Página de login.
+- **/signUp**: Página de cadastro de novos usuários.
+
+## Estilização
+O projeto utiliza styled-components para gerenciar o CSS-in-JS, proporcionando componentes estilizados que são reutilizados por toda a aplicação.
+
+## Stack utilizada
+- **React v18.3.1**
+- **TypeScript**
+- **Vite**
+- **Axios**
+- **Yup e Formik**
+- **Styled-components**
+- **ESLint**
+

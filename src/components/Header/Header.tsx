@@ -53,7 +53,6 @@ const Header: React.FC = () => {
         <HeaderSidebarLink href="/">Posts</HeaderSidebarLink>
         {isAuthenticated && <>
           <HeaderSidebarLink href="/postsForm">Criar Posts</HeaderSidebarLink>
-        <HeaderSidebarLink href="/">Professores</HeaderSidebarLink>
         <HeaderSidebarLink href="/postsAdmin">Administrar posts</HeaderSidebarLink>
         </>}
      

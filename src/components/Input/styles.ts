@@ -11,7 +11,7 @@ const colorType = {
 export const InputGroup = styled.div`
   width: 100%;
   position: relative;
-  padding: 10px;
+  padding: 10px 0;
 `;
 
 export const InputField = styled.input`
@@ -23,6 +23,7 @@ export const InputField = styled.input`
   color: ${colorType.blackFont};
   transition: border 150ms cubic-bezier(0.4,0,0.2,1);
 	margin: 10px 0 0 0;
+  max-width: -webkit-fill-available;
 
 	&:focus {
 		outline: none;
@@ -44,6 +45,7 @@ export const InputTextArea = styled.textarea`
   color: ${colorType.blackFont};
   transition: border 150ms cubic-bezier(0.4,0,0.2,1);
 	margin: 10px 0 0 0;
+  max-width: -webkit-fill-available;
 
 	&:focus {
 		outline: none;

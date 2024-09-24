@@ -54,6 +54,7 @@ export const HeaderSidebar = styled.nav<{ isOpen: boolean }>`
   flex-direction: column;
   padding: 20px;
   transition: left 1s ease-in-out;
+  z-index: 999;
 `;
 
 export const HeaderSidebarLink = styled.a`

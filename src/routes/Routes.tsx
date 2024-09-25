@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PostsList from '../pages/PostsList/PostsList'
 import PostDetail from '../pages/PostDetail/PostDetail'

@@ -5,9 +5,7 @@ import {
   Label,
   Input,
   ErrorText,
-  SubmitButton,
-  BottomText,
-  Link
+  SubmitButton
 } from "./styles";
 import {api} from '../../services/api'
 import { useAuth } from '../../context/AuthContext'
@@ -31,7 +29,7 @@ interface FormValues {
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState<FormValues>({ email: '', password: '' })
+  const [formData] = useState<FormValues>({ email: '', password: '' })
   const [error, setError] = useState<string | null>(null)
   const { login} = useAuth();
   

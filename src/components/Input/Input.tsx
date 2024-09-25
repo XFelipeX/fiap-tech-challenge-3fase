@@ -26,7 +26,7 @@ const Input: React.FC<InputData> = ({ label, name, type = 'text', options }) => 
         <InputTextArea
           {...field}
           id={name}
-          rows='6'
+          rows={6}
         /> :
         type === 'select' ?
           <InputSelect {...field} id={name} >

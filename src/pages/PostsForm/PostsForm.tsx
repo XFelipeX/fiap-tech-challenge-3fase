@@ -16,14 +16,6 @@ interface OptionsData {
   label: string
 }
 
-interface Post {
-	id: number
-	teachername: string
-	title: string
-	content: string
-	createddate: string
-}
-
 const validations = Yup.object({
   title: Yup.string()
     .required('O título é obrigatório'),

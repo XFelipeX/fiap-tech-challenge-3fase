@@ -1,10 +1,7 @@
 import axios from 'axios';
-import { NavigateFunction } from 'react-router-dom';
-
-const baseURL = 'http://localhost:6868';
 
 const api = axios.create({
-  baseURL: baseURL,
+  baseURL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

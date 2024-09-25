@@ -70,14 +70,17 @@ const PostsListAdmin: React.FC = () => {
   const deletePost = async (postId: number) => {
     const confirmation = confirm('Tem certeza que deseja excluir este post?')
     
+    if(postId === undefined) return
+
     if (!confirmation) return
 
     try {
-      const response = await api.delete(`/posts/${postId}`)
+      console.log('Excluindo post: ', postId)
+      await api.delete(`/posts/${postId}`)
       fectchPosts()
       alert('Post excluido com sucesso')
 
-    } catch (error: unknown) {
+    } catch (error: any) {
       setError(error.message)
     }
   }

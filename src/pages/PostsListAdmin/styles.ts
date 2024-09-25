@@ -100,7 +100,11 @@ export const PostButtons = styled.div`
   padding: 15px 20px;
 `;
 
-export const ControlButtons = styled.button`
+interface ControlButtonProps {
+  variant: 'edit' | 'delete'; // Definindo os valores possíveis para 'variant'
+}
+
+export const ControlButtons = styled.button<ControlButtonProps>`
   color: ${colorType.standardFont};
   font-weight: bold;
   border: none;

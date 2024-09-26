@@ -85,7 +85,7 @@ Requisitos funcionais
 
 ### Introdução
 
-Este documento oferece uma visão detalhada do projeto da 3ª fase do FIAP Tech Challenge. A aplicação foi desenvolvida utilizando React com TypeScript e gerenciada através do Vite como bundler e servidor de desenvolvimento. O projeto é uma interface web para consumir e gerenciar posts, com rotas de autenticação e administração. Aqui, descrevemos como instalar e executar a aplicação, além de dar uma visão geral da arquitetura e stack utilizada.
+Este documento oferece uma visão detalhada do projeto da 3ª fase do FIAP Tech Challenge. A aplicação foi desenvolvida utilizando React com TypeScript e gerenciada através do Vite como bundler e servidor de desenvolvimento. O projeto é uma interface web para consumir e gerenciar posts, com rotas de autenticação e administração. Aqui, descrevemos como instalar, configurar e executar a aplicação, além de dar uma visão geral da arquitetura e stack utilizada.
 
 ### Setup Inicial
 
@@ -113,6 +113,15 @@ cd fiap-tech-challenge-3fase
 ```
 npm install
 ```
+
+**Configuração:**
+
+Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
+
+- NODE_LOCAL_PORT=<sua_porta>
+- NODE_DOCKER_PORT=<porta_do_docker>
+- BACKEND_URL=<url_do_backend>
+- VITE_BACKEND_URL=<url_do_backend>
 
 **Execução:**
 
@@ -171,4 +180,5 @@ O projeto utiliza styled-components para gerenciar o CSS-in-JS, proporcionando c
 - **Yup e Formik**
 - **Styled-components**
 - **ESLint**
+- **Docker**
 

@@ -85,7 +85,7 @@ Requisitos funcionais
 
 ### Introdução
 
-Este documento oferece uma visão detalhada do projeto da 3ª fase do FIAP Tech Challenge. A aplicação foi desenvolvida utilizando React com TypeScript e gerenciada através do Vite como bundler e servidor de desenvolvimento. O projeto é uma interface web para consumir e gerenciar posts, com rotas de autenticação e administração. Aqui, descrevemos como instalar e executar a aplicação, além de dar uma visão geral da arquitetura e stack utilizada.
+Este documento oferece uma visão detalhada do projeto da 3ª fase do FIAP Tech Challenge. A aplicação foi desenvolvida utilizando React com TypeScript e gerenciada através do Vite como bundler e servidor de desenvolvimento. O projeto é uma interface web para consumir e gerenciar posts, com rotas de autenticação e administração. Aqui, descrevemos como instalar, configurar e executar a aplicação, além de dar uma visão geral da arquitetura e stack utilizada.
 
 ### Setup Inicial
 
@@ -95,6 +95,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 - Node.js v20+
 - npm v10+
+- Docker
 - Backend implementado na 2ª fase do Tech Challenge, Link para o repositorio: https://github.com/XFelipeX/fiap-tech-challenge-2fase
 
 **Instalação:**
@@ -113,10 +114,27 @@ cd fiap-tech-challenge-3fase
 ```
 npm install
 ```
+**Configuração:**
+
+Crie um arquivo **.env** na raiz do projeto com as seguintes variáveis:
+- NODE_LOCAL_PORT=<sua_porta>
+- NODE_DOCKER_PORT=<porta_docker>
+- BACKEND_URL=<url_do_backend>
 
 **Execução:**
 
-Para executar a aplicação em ambiente de desenvolvimento, utilize o seguinte comando:
+**Docker compose**
+
+Para rodar o projeto com Docker Compose, que irá criar o container da aplicação React e disponibilizá-la:
+```
+docker-compose up
+```
+Isso irá criar e iniciar o container da aplicação, expondo-a na porta configurada no arquivo .env.
+
+**Somente Aplicação Node (sem Docker)**
+
+
+Caso prefira rodar o projeto sem Docker, utilize o comando:
 ```
 npm run dev
 ```
@@ -171,4 +189,5 @@ O projeto utiliza styled-components para gerenciar o CSS-in-JS, proporcionando c
 - **Yup e Formik**
 - **Styled-components**
 - **ESLint**
+- **Docker**
 

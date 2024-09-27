@@ -1,0 +1,43 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      NODE_DOCKER_PORT: ${{ secrets.NODE_DOCKER_PORT }}
+      BACKEND_URL: ${{ secrets.BACKEND_URL }}
+      
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+  
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+  
+    - name: Fix Jest permissions
+      run: chmod +x ./node_modules/.bin/jest
+ 
+    - name: Run tests
+      run: npm run test
+ 
+    - name: Build and Push Docker Image
+      if: success()
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        docker build --build-arg NODE_DOCKER_PORT=$NODE_DOCKER_PORT \
+                     --build-arg VITE_BACKEND_URL=$BACKEND_URL \
+                     -t $DOCKER_USERNAME/fiap-tech-challenge-3fase:latest -f Dockerfile .
+        docker push $DOCKER_USERNAME/fiap-tech-challenge-3fase:latest

@@ -35,3 +35,7 @@ jobs:
                      --build-arg VITE_BACKEND_URL=$BACKEND_URL \
                      -t $DOCKER_USERNAME/fiap-tech-challenge-3fase:latest -f Dockerfile .
         docker push $DOCKER_USERNAME/fiap-tech-challenge-3fase:latest
+
+    - name: Deploy to render using Webhook
+      run: |
+        curl -X POST "https://api.render.com/deploy/srv-crplt80gph6c739v6vb0?key=zZa8p7QNzY4"
